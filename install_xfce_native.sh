@@ -116,7 +116,7 @@ main() {
         echo "• Android operating system"
         echo "• At least 4GB free storage"
         echo "• At least 2GB RAM recommended"
-        exit 1
+        #exit 1
     fi
 
     echo -e "\n${GREEN}This will install XFCE native desktop in Termux"
@@ -136,7 +136,7 @@ main() {
     # Change repository
 if ! termux-change-repo; then
     echo "Failed to change repository. Exiting."
-    exit 1
+    #exit 1
 fi
 
 # Check if storage access is already granted
@@ -147,14 +147,14 @@ else
     if ! termux-setup-storage; then
         echo "Failed to set up Termux storage. Exiting."
         echo "${YELLOW}Please clear termux data in app info setting and run setup again${NC}"
-        exit 1
+        #exit 1
     fi
 fi
 
 # Upgrade packages
 if ! pkg upgrade -y -o Dpkg::Options::="--force-confold"; then
     echo "Failed to upgrade packages. Exiting."
-    exit 1
+    #exit 1
 fi
 
 # Update termux.properties
@@ -176,7 +176,7 @@ done
 if [ "${#missing_deps[@]}" -gt 0 ]; then
     if ! pkg install -y "${missing_deps[@]}" -o Dpkg::Options::="--force-confold"; then
         echo "Failed to install missing dependencies: ${missing_deps[*]}. Exiting."
-        exit 1
+        #exit 1
     fi
 fi
 
@@ -189,7 +189,7 @@ mkdir -p "$HOME/Desktop" "$HOME/Downloads" "$HOME/.fonts" "$HOME/.config" "$HOME
 xfce_packages=('xfce4' 'xfce4-goodies' 'xfce4-pulseaudio-plugin' 'firefox' 'starship' 'termux-x11-nightly' 'virglrenderer-android' 'mesa-vulkan-icd-freedreno-dri3' 'fastfetch' 'papirus-icon-theme' 'eza' 'bat')
 if ! pkg install -y "${xfce_packages[@]}" -o Dpkg::Options::="--force-confold"; then
     echo "Failed to install XFCE packages. Exiting."
-    exit 1
+    #exit 1
 fi
 
 # Set aliases
